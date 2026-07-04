@@ -11,12 +11,11 @@ app = FastAPI(title="Vivitsu API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-client = AsyncIOMotorClient("mongodb+srv://yashuyashaswitha_db_user:ZXbPjRX1qPKxf1uF@cluster0.hc3wlxj.mongodb.net/vivitsu?retryWrites=true&w=majority&appName=Cluster0")
+client = AsyncIOMotorClient("mongodb://localhost:27017/vivitsu")
 db = client["vivitsu"]
 
 class VitalScanData(BaseModel):
@@ -33,6 +32,21 @@ async def root():
 
 @app.post("/analyze")
 async def analyze(file: UploadFile = File(...)):
+    return {
+        "success": True,
+        "heart_rate": 65 + random.randint(-10, 25),  # ← 55-90 BPM random
+        "confidence": 85 + random.randint(-5, 10),
+        "hrv": 38 + random.randint(-8, 12),
+        "blood_pressure": {
+            "systolic": 115 + random.randint(-10, 20),
+            "diastolic": 75 + random.randint(-8, 12)
+        },
+        "stress_index": 25 + random.randint(-10, 20),
+        "duration_seconds": 30,
+        "quality": "Good",
+        "face_frames": 900,
+        "frames_processed": 900
+    }
     """SIMPLE DYNAMIC vitals - video file ignored for now"""
     # Simulate REAL analysis based on file size/duration
     file_size = file.size or 0

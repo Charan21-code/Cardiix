@@ -166,8 +166,8 @@
 //     }
 //   }
 // };
-const BACKEND_URL = 'http://localhost:3000';
-const RPPG_URL = 'http://localhost:8001';
+const BACKEND_URL = 'http://localhost:5001';
+const RPPG_URL = 'http://localhost:8000';
 
 // Public development proxy
 const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
@@ -200,8 +200,8 @@ export const localServices = {
     };
 
     const [backend, rppg] = await Promise.all([
-      check(`${BACKEND_URL}/api/health`),
-      check(`${RPPG_URL}/health`)
+      check(`${BACKEND_URL}/`),
+      check(`${RPPG_URL}/`)
     ]);
 
     return { backend, rppg };

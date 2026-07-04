@@ -4,6 +4,7 @@ from transformers import pipeline
 from fastapi import APIRouter, Depends, HTTPException
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+from fastapi import FastAPI
 
 app = FastAPI(
     title="Medical Analysis Service",

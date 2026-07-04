@@ -12,7 +12,7 @@ interface MedicalReport {
 }
 
 
-const API_BASE_URL = 'https://cardiiix.onrender.com/api';
+const API_BASE_URL = 'http://localhost:5001/api';
 
 
 export const groqService = {
@@ -155,7 +155,7 @@ End with: "⚠️ AI-generated. Consult a healthcare professional."`;
     try {
       // This endpoint should use OCR (Tesseract) on backend, not vision API
       // Your existing /api/medical/analyze endpoint already does this
-      const response = await fetch('http://localhost:5000/api/medical/analyze', {
+      const response = await fetch('http://localhost:5001/api/medical/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ image: base64Image, mimeType })

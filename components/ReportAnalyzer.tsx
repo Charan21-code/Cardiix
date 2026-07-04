@@ -88,8 +88,8 @@ const analyzeFile = async () => {
   try {
     const base64Data = previewUrl.split(',')[1];
     
-    // Point to backend on port 5000
-    const response = await fetch('http://localhost:5000/api/medical/analyze', {
+    // Point to backend on port 5001
+    const response = await fetch('http://localhost:5001/api/medical/analyze', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -126,7 +126,7 @@ const analyzeFile = async () => {
     console.error("Full Analysis Error:", error);
     
     if (error.message.includes('Failed to fetch')) {
-      setAnalysis("❌ Cannot connect to backend. Is it running on port 5000?");
+      setAnalysis("❌ Cannot connect to backend. Is it running on port 5001?");
     } else if (error.message.includes('HTML')) {
       setAnalysis("❌ Wrong URL - getting HTML instead of API response. Check console.");
     } else {
