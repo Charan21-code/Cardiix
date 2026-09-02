@@ -1,18 +1,59 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vivitsu Medical AI</title>
+    <title>Cardiix</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Outfit', 'sans-serif'],
+            },
+            colors: {
+              slate: {
+                50: '#faf7f2',
+                100: '#f2ebe0',
+                200: '#e6dccf',
+                300: '#d5c7b7',
+                400: '#a89583',
+                500: '#7d6c5d',
+                600: '#5f5247',
+                700: '#463d35',
+                800: '#2f2925',
+                900: '#1c1917',
+              },
+              crimson: {
+                50: '#fff1f2',
+                100: '#ffe4e6',
+                500: '#f43f5e',
+                600: '#e11d48',
+                700: '#be123c',
+                800: '#9f1239',
+                900: '#881337',
+              },
+              ivory: {
+                50: '#fdfdfd',
+                100: '#fafafa',
+                200: '#f5f5f5',
+                300: '#e5e5e5'
+              }
+            }
+          }
+        }
+      }
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            background-color: #fff2e8;
+            color: #1c1917;
         }
     </style>
 <script type="importmap">

@@ -69,7 +69,7 @@
 
 //     const targetUrl = useProxy ? `${CORS_PROXY}${RPPG_URL}/analyze-video` : `${RPPG_URL}/analyze-video`;
     
-//     console.log(`%c[LIVE] Sending to ${targetUrl}`, "color: #3b82f6; font-weight: bold");
+//     console.log(`%c[LIVE] Sending to ${targetUrl}`, "color: #a16207; font-weight: bold");
 
 //     const response = await fetch(targetUrl, {
 //       method: 'POST',
@@ -137,7 +137,7 @@
 //     }
 
 //     try {
-//       console.log("%c🔄 Fetching scan history from MongoDB...", "color: #3b82f6; font-weight: bold");
+//       console.log("%cFetching scan history from MongoDB...", "color: #a16207; font-weight: bold");
 //       const response = await fetch(`${BACKEND_URL}/api/scans`);
       
 //       if (response.ok) {
@@ -213,7 +213,7 @@ export const localServices = {
 
     const targetUrl = useProxy ? `${CORS_PROXY}${RPPG_URL}/analyze-video` : `${RPPG_URL}/analyze-video`;
     
-    console.log(`%c[LIVE] Sending to ${targetUrl}`, "color: #3b82f6; font-weight: bold");
+    console.log(`%c[LIVE] Sending to ${targetUrl}`, "color: #a16207; font-weight: bold");
 
     const response = await fetch(targetUrl, {
       method: 'POST',
@@ -270,7 +270,7 @@ export const localServices = {
 
   async getScanHistory() {
     try {
-      console.log("%c🔄 Fetching scan history from MongoDB...", "color: #3b82f6; font-weight: bold");
+      console.log("%cFetching scan history from MongoDB...", "color: #a16207; font-weight: bold");
       const response = await fetch(`${BACKEND_URL}/api/scans`);
       
       if (response.ok) {

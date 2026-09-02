@@ -24,6 +24,16 @@ dist-ssr
 *.sw?
 .env
 backend/.env
-debug_arcus_detection.jpg
-services/.venv/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+venv/
+.venv/
+env/
 
+# Debug & Temporary Files
+*.OLD_*
+**/debug_arcus_detection.jpg
+services/.venv/

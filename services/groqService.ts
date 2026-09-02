@@ -124,7 +124,7 @@ Provide:
 - Clinical findings for each metric
 - Recommendations
 
-End with: "⚠️ AI-generated. Consult a healthcare professional."`;
+End with: "Warning: AI-generated. Consult a healthcare professional."`;
 
       const response = await fetch(`${API_BASE_URL}/chat/message`, {
         method: 'POST',
@@ -174,3 +174,4 @@ End with: "⚠️ AI-generated. Consult a healthcare professional."`;
     }
   }
 };
+

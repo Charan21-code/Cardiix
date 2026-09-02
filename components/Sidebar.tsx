@@ -1,65 +1,56 @@
-
 import React from 'react';
-import { View } from '../types';
-import { Activity, MessageSquare, FileText, Heart, ScanFace, User } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
+import { Activity, MessageSquare, FileText, Heart, ScanFace } from 'lucide-react';
 
-interface SidebarProps {
-  activeView: View;
-  onViewChange: (view: View) => void;
-}
-
-const Sidebar: React.FC<SidebarProps> = ({ activeView, onViewChange }) => {
+const Sidebar: React.FC = () => {
   const navItems = [
-    { id: View.DASHBOARD, label: 'Dashboard', icon: Activity },
-    { id: View.VITAL_SCAN, label: 'Vital Scan', icon: ScanFace },
-    { id: View.CHAT, label: 'Symptom AI', icon: MessageSquare },
-    { id: View.REPORTS, label: 'Report Analyzer', icon: FileText },
-    
+    { path: '/dashboard', label: 'Dashboard', icon: Activity, end: true },
+    { path: '/dashboard/scan', label: 'Vital Scan', icon: ScanFace },
+    { path: '/dashboard/reports', label: 'Report Analyzer', icon: FileText },
+    { path: '/dashboard/chat', label: 'Cardiix AI', icon: MessageSquare },
   ];
 
   return (
-    <aside className="w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0">
-      <div className="p-6 flex items-center gap-3">
-        <div className="p-2 bg-blue-600 rounded-lg text-white">
-          <Heart size={24} fill="currentColor" />
+    <nav className="bg-white/90 backdrop-blur-xl border border-white shadow-xl shadow-orange-900/5 rounded-full px-4 py-3 flex items-center justify-between gap-4 md:gap-8 min-w-max">
+      {/* Branding */}
+      <NavLink
+        to="/"
+        className="flex items-center gap-3 pr-4 md:pr-6 border-r border-slate-200 hover:opacity-80 transition-opacity"
+      >
+        <div className="w-9 h-9 shrink-0 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center shadow-md shadow-orange-500/20">
+          <Heart size={18} className="text-white" fill="currentColor" />
         </div>
-        <span className="text-xl font-bold tracking-tight text-white">CardiaX</span>
-      </div>
+        <span className="text-xl font-display font-bold tracking-tight text-slate-800 hidden sm:block">
+          Cardiix
+        </span>
+      </NavLink>
 
-      <nav className="flex-1 px-4 mt-4 space-y-1">
+      {/* Navigation */}
+      <div className="flex items-center gap-1 md:gap-2">
         {navItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => onViewChange(item.id)}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
-              activeView === item.id 
-                ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20' 
-                : 'hover:bg-slate-800 hover:text-white'
-            }`}
+          <NavLink
+            key={item.path}
+            to={item.path}
+            end={item.end}
+            className={({ isActive }) => `
+              flex items-center gap-2 px-3 md:px-5 py-2.5 rounded-full transition-all duration-200 group font-medium text-sm
+              ${isActive
+                ? 'bg-orange-100 text-orange-700 shadow-sm border border-orange-200/50'
+                : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 border border-transparent'
+              }
+            `}
+            title={item.label}
           >
-            <item.icon size={20} />
-            <span className="font-medium">{item.label}</span>
-          </button>
+            {({ isActive }) => (
+              <>
+                <item.icon size={18} className={isActive ? "text-orange-600" : "text-slate-400 group-hover:text-slate-600"} />
+                <span className="hidden lg:block">{item.label}</span>
+              </>
+            )}
+          </NavLink>
         ))}
-        
-      </nav>
-
-      <div className="p-6 space-y-6">
-       
-
-        <div className="border-t border-slate-700 pt-4">
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-slate-800 group">
-            <div className="p-2 bg-blue-500/20 rounded-lg text-blue-400 group-hover:bg-blue-500/30 transition-colors">
-              <User size={20} />
-            </div>
-            <div className="flex-1 text-left">
-              <p className="text-sm font-medium text-white">User Profile</p>
-              
-            </div>
-          </button>
-        </div>
       </div>
-    </aside>
+    </nav>
   );
 };
 

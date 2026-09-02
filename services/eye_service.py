@@ -216,23 +216,23 @@ def detect_arcus_opencv(image: Image.Image) -> Dict:
         is_uniform_ring = False
 
     # ========================================
-    # ADAPTIVE THRESHOLDS - STRICTER
+    # ADAPTIVE THRESHOLDS
     # ========================================
     
     avg_brightness = (mean_ring + mean_iris) / 2
     is_dark_image = avg_brightness < 120
     
     if is_dark_image:
-        BRIGHTNESS_DIFF_MIN = 28
-        CONTRAST_MIN = 1.30
-        RING_BRIGHTNESS_MIN = 95
+        BRIGHTNESS_DIFF_MIN = 20
+        CONTRAST_MIN = 1.20
+        RING_BRIGHTNESS_MIN = 85
     else:
-        BRIGHTNESS_DIFF_MIN = 38
-        CONTRAST_MIN = 1.50
-        RING_BRIGHTNESS_MIN = 140
+        BRIGHTNESS_DIFF_MIN = 30
+        CONTRAST_MIN = 1.30
+        RING_BRIGHTNESS_MIN = 120
 
     # ========================================
-    # DETECTION LOGIC - FIXED
+    # DETECTION LOGIC
     # ========================================
     
     # Core checks
@@ -243,35 +243,33 @@ def detect_arcus_opencv(image: Image.Image) -> Dict:
     
     # Multi-level detection
     strong_arcus = (
-        has_brightness_diff and
-        has_high_contrast and
-        has_absolute_brightness and
-        has_uniform_pattern and
-        has_smooth_ring and 
-        not ring_similar_to_sclera and
-        segments_bright >= 11 and segment_cv < 0.15
+        intensity_diff > 35 and
+        contrast_ratio > 1.35 and
+        mean_ring > 125 and
+        segment_cv < 0.18 and
+        segments_bright >= 10 and
+        has_smooth_ring
     )
     
     moderate_arcus = (
-        intensity_diff > 45 and
-        contrast_ratio > 1.80 and
-        has_uniform_pattern and
-        has_smooth_ring and
-        not ring_similar_to_sclera and
+        intensity_diff > 30 and
+        contrast_ratio > 1.28 and
+        mean_ring > 115 and
+        segment_cv < 0.22 and
         segments_bright >= 9 and
-        segment_cv < 0.25
+        has_smooth_ring
     )
     
     mild_arcus = (
-        intensity_diff > 55 and
-        contrast_ratio > 2.00 and
-        segment_cv < 0.33 and  # Tightened from 0.28
-        has_smooth_ring and
-        not ring_similar_to_sclera and
-        segments_bright >= 8
+        intensity_diff > 25 and
+        contrast_ratio > 1.22 and
+        mean_ring > 110 and
+        segment_cv < 0.22 and
+        segments_bright >= 8 and
+        has_smooth_ring
     )
     
-    # FINAL DECISION - MOVED BEFORE CONFIDENCE CALCULATION
+    # FINAL DECISION
     arcus_detected = bool(strong_arcus or moderate_arcus or mild_arcus)
 
     # ========================================
